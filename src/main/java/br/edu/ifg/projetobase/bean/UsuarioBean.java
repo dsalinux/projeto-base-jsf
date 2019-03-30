@@ -1,5 +1,6 @@
 package br.edu.ifg.projetobase.bean;
 
+import br.edu.ifg.projetobase.dao.UsuarioDAO;
 import br.edu.ifg.projetobase.entity.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
@@ -18,10 +20,18 @@ public class UsuarioBean implements Serializable{
     private List<Usuario> usuarios;
     private Long codigo = 1L;
     
+    @Inject
+    private UsuarioDAO usuarioDAO;
+    
     @PostConstruct
     public void init(){
         usuario = new Usuario();
         usuarios = new ArrayList<>();   
+    }
+    
+    public void mensagem(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(usuarioDAO.getMensagem()));
     }
 
     public void adicionarUsuario(){

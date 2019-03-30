@@ -8,6 +8,9 @@
     </h:head>
     <h:body>
         <h:form>
+            <p:messages autoUpdate="true"></p:messages>
+            <p:commandButton actionListener="#{usuarioBean.mensagem()}" 
+                                     value="Ver Mensagem" update="@form"></p:commandButton>
             <p:fieldset legend="Dashboard">
                 <p:panelGrid columns="2" styleClass="ui-noborder">
                     <p:outputLabel value="Nome"></p:outputLabel>
